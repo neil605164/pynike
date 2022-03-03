@@ -9,16 +9,20 @@ url = "https://www.nike.com/tw/launch"
 options = Options()
 # 不顯示「彈出的訊息」
 options.add_argument("--disable-notifications")
+options.add_argument('--disable-blink-features=AutomationControlled')
+options.add_experimental_option('useAutomationExtension', False)
 # 不顯示「正受到自動測試軟體控制」
-options.add_experimental_option("excludeSwitches",['enable-automation'])
+options.add_experimental_option("excludeSwitches", ['enable-automation'])
 # 使用偽造的 user-agent
-ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109 Safari/537.36"
+ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+# ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109 Safari/537.36"
 options.add_argument("user-agent={}".format(ua))
-
+# proxy
+# options.add_argument('--proxy-server=96.9.77.71:8080')
 
 
 # 指定 chrome driver
-chrome = webdriver.Chrome('./mac/chromedriver', chrome_options=options)
+chrome = webdriver.Chrome('./linux/chromedriver', chrome_options=options)
 # 設定尺寸
 chrome.set_window_size(1500, 1280)
 # 開啟畫面
@@ -53,7 +57,7 @@ email.send_keys("2.Gs5JEAbY@FVH5")
 chrome.find_element_by_css_selector("input[type='button']").click()
 
 # 等待秒後關閉
-time.sleep(600)
+time.sleep(60)
 
 # 關閉
 chrome.quit()
